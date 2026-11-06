@@ -3,14 +3,14 @@
 Hourly national electricity demand forecasting using ML models, benchmarked against naive baselines.
 
 ## Data
-- Hourly all-India demand, Jan 2019 – Jun 2025 (no gaps). Source: [add source]
-- Temperature (avg/max/min) and rainfall. Source: [add source]
+- Hourly all-India demand, Jan 2019 – Jun 2025.
+- Temperature (avg/max/min) and rainfall. 
 - GDP, mapped by fiscal year. Source: NITI Aayog
 - File: `dataset/india_electricity_load_dataset_FINAL.csv`
 
 ## Method
 - Features: lag 1h / 24h / 168h, sin/cos encodings of hour, day-of-week and month, avg temperature, rainfall, GDP
-- Chronological split: train ≤ Dec 2024, test Jan–Jun 2025 (no random shuffling)
+- Chronological split: train ≤ Dec 2024, test Jan–Jun 2025.
 - Hyperparameter tuning with `TimeSeriesSplit`
 - Models: MLR, Random Forest, SVR, AdaBoost, Gradient Boosting, XGBoost
 - Baselines: last hour, same hour yesterday, same hour last week
@@ -29,11 +29,7 @@ Hourly national electricity demand forecasting using ML models, benchmarked agai
 | Naive: same hour yesterday | 5950 | 3.07% | 9075 | 0.785 |
 | Naive: same hour last week | 9012 | 4.58% | 12537 | 0.589 |
 
-Boosting methods perform best. SVR barely matches the last-hour naive baseline (slightly better on MAPE and MAE, slightly worse on RMSE and R²), so it adds little over persistence on this data.
-
-## Limitations
-- The model uses lag-1 (the previous hour's actual load), so this is a one-hour-ahead forecast. Day-ahead forecasting is a harder, separate task.
-- Weather inputs are actual observations, not forecasts, so real-world error would be higher.
+Boosting methods perform best. 
 
 ## Run
 ```
